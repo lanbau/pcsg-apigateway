@@ -4,23 +4,94 @@
     <meta charset="utf-8">
     <title>apis</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <style media="screen">
+    html, body, .container-table {
+      height: 100%;
+    }
+    .container-table {
+      display: table;
+    }
+    .vertical-center-row {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    </style>
   </head>
   <body>
-    <button type="button" id="kongApi">Get Kong APIs</button>
+    <button class="btn-primary" type="button" id="kongApi">Get Kong APIs</button></div>
+    <button class="btn-primary" type="button" id="usersApi">Get Users</button></div>
+    <div id="app-6">
+      <ol>
+        <!-- Now we provide each todo-item with the todo object    -->
+        <!-- it's representing, so that its content can be dynamic -->
+        <kong-api v-for="item in kongapis" v-bind:kongapis="item"></kong-api>
+      </ol>
+    </div>
+
+    <div id="app-7">
+      <ol>
+        <!-- Now we provide each todo-item with the todo object    -->
+        <!-- it's representing, so that its content can be dynamic -->
+        <users-api v-for="item in groceryList" v-bind:users="item"></users-api>
+      </ol>
+    </div>
 
     <script type="text/javascript">
     var kongApi = document.getElementById('kongApi');
+    var usersApi = document.getElementById('usersApi');
+
+    Vue.component('kong-api', {
+      props: ['kongapis'],
+      template: '<li>{{ kongapis.name }}</li>'
+    })
 
     kongApi.addEventListener('click', function() {
+      console.log('kong clicked')
       $.post("/apis",
       {
-          name: "Donald Duck",
-          city: "Duckburg"
+          name: "example.org"
       },
       function(data, status){
           console.log(data)
+          var app6 = new Vue({
+            el: '#app-6',
+            data: {
+              kongapis: data.data
+            }
+          })
       });
     })
+
+    Vue.component('users-api', {
+      props: ['users'],
+      template: '<li>{{ users.first_name }}</li>'
+    })
+
+
+    usersApi.addEventListener('click', function() {
+      console.log('users clicked')
+      $.post("/apis",
+      {
+          name: "pcsg-apigateway.herokuapp.com"
+      },
+      function(data, status){
+        console.log(data)
+          var app7 = new Vue({
+            el: '#app-7',
+            data: {
+              groceryList: data
+            }
+          })
+      });
+    })
+
+
+
 
     </script>
   </body>
