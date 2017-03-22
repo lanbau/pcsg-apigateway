@@ -10,35 +10,53 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/vue"></script>
     <style media="screen">
-    html, body, .container-table {
-      height: 100%;
-    }
-    .container-table {
-      display: table;
-    }
-    .vertical-center-row {
-      display: table-cell;
-      vertical-align: middle;
-    }
     </style>
   </head>
   <body>
-    <button class="btn-primary" type="button" id="kongApi">Get Kong APIs</button></div>
-    <button class="btn-primary" type="button" id="usersApi">Get Users</button></div>
-    <div id="app-6">
-      <ol>
-        <!-- Now we provide each todo-item with the todo object    -->
-        <!-- it's representing, so that its content can be dynamic -->
-        <kong-api v-for="item in kongapis" v-bind:kongapis="item"></kong-api>
-      </ol>
+    <div class="row">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">PCSG API Gateway</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+          </ul>
+          <button class="btn btn-danger navbar-btn">Button</button>
+        </div>
+      </nav>
     </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <ul>
+              <li><button class="btn-primary" type="button" id="kongApi">Get Kong APIs</button></li>
+              <li><button class="btn-primary" type="button" id="usersApi">Get Users</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div id="app-6">
+              <ol>
+                <kong-api v-for="item in kongapis" v-bind:kongapis="item"></kong-api>
+              </ol>
+            </div>
 
-    <div id="app-7">
-      <ol>
-        <!-- Now we provide each todo-item with the todo object    -->
-        <!-- it's representing, so that its content can be dynamic -->
-        <users-api v-for="item in groceryList" v-bind:users="item"></users-api>
-      </ol>
+            <div id="app-7">
+              <ol>
+                <users-api v-for="item in groceryList" v-bind:users="item"></users-api>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <script type="text/javascript">
